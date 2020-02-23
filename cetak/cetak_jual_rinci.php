@@ -1,0 +1,48 @@
+ <?php include "../koneksi.php" ?>
+ <table class="table table-hover table-condensed table-striped" width="800" border="1">
+                       <right>   <thead><tr><th colspan=7 align=center><strong>Laporan Penjualan</strong></th></tr>
+                                    <th>No Faktur</th>
+                                    <th>Tanggal</th>
+
+                                    <tr>
+                                        <th>No</th><th>No Faktur</th><th>Tanggal</th><th>Jumlah</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+  <?php
+$no=1;
+$sql1 = "select * from tbltransaksi_jual_rinci inner join tblbarang on tbltransaksi_jual_rinci.kode_barang = tblbarang.kode_barang where tbltransaksi_jual_rinci.no_faktur ='$record[no_faktur]'";
+$proses1 = mysql_query($sql1);
+while ($record1 = mysql_fetch_array($proses1))
+{
+?>   
+
+  <?php 
+  $no=1;                             
+$sql = "select * from tbltransaksi_jual";
+$proses = mysql_query($sql);
+while ($record = mysql_fetch_array($proses))
+{
+
+?>        
+                                   <tr>
+                                        <td><?php echo $no ?></td><td>
+                                         <?php echo $record['no_faktur'] ?></td>
+                                        <td> <?php echo $record['tanggal'] ?></td>
+                                                                          
+                                        <td>Rp.<?php echo number_format($record['total'], 0, ',','.') ?></td>
+          								
+
+
+   <?php $no++;} 
+   ?>
+ </tr> 
+</tbody>
+
+                            </table>
+                            
+                            
+                            <script language="javascript">
+window.print()
+</script>
